@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "fd19698b-087c-4a9f-bd23-de57b82571c7",
+		"name": "XMLRPC API McEasy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20046357"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n     <methodCall>\r\n         <methodName>authenticate</methodName>\r\n         <params>\r\n             <param>\r\n                 <value><string>v17_mc_test</string></value>\r\n             </param>\r\n             <param>\r\n                 <value><string>admin</string></value>\r\n             </param>\r\n             <param>\r\n                 <value><string>{{admin token}}</string></value>\r\n             </param>\r\n             <param>\r\n                 <value><struct></struct></value>\r\n             </param>\r\n         </params>\r\n     </methodCall>\r\n     ",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8069/xmlrpc/2/common",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8069",
+					"path": [
+						"xmlrpc",
+						"2",
+						"common"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Partner ids",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<methodCall>\r\n  <methodName>execute_kw</methodName>\r\n  <params>\r\n    <param><value><string>v17_mc_test</string></value></param>\r\n    <param><value><int>2</int></value></param>\r\n    <param><value><string>e1358b3eb958464c2788216c0da14f7a6e8a58a7</string></value></param>\r\n    <param><value><string>res.partner</string></value></param>\r\n    <param><value><string>search_read</string></value></param>\r\n    <param>\r\n        <value>\r\n        <array>\r\n        <data>\r\n            <value>\r\n            <array>\r\n            <data>\r\n                <value>\r\n                <array>\r\n                <data>\r\n                    <value><string>is_company</string></value>\r\n                    <value><string>=</string></value>\r\n                    <value><boolean>1</boolean></value>\r\n                </data>\r\n                </array>\r\n                </value>\r\n            </data>\r\n            </array>\r\n            </value>\r\n        </data>\r\n        </array>\r\n        </value>\r\n    </param>\r\n    <param>\r\n      <value>\r\n        <struct>\r\n          <member>\r\n            <name>fields</name>\r\n            <value>\r\n              <array><data>\r\n                <value><string>id</string></value>\r\n                <value><string>name</string></value>\r\n                <value><string>email</string></value>\r\n              </data></array>\r\n            </value>\r\n          </member>\r\n        </struct>\r\n      </value>\r\n    </param>\r\n  </params>\r\n</methodCall>\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8069/xmlrpc/2/object",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8069",
+					"path": [
+						"xmlrpc",
+						"2",
+						"object"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Sale ids",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<methodCall>\r\n    <methodName>execute_kw</methodName>\r\n    <params>\r\n        <param>\r\n            <value><string>v17_mc_test</string></value>\r\n        </param>\r\n        <param>\r\n            <value><int>{{customer uid}}</int></value>\r\n        </param>\r\n        <param>\r\n            <value><string>{{customer token}}</string></value>\r\n        </param>\r\n        <param>\r\n            <value><string>sale.order</string></value>\r\n        </param>\r\n        <param>\r\n            <value><string>search_read</string></value>\r\n        </param>\r\n        <param>\r\n        <value>\r\n        <array>\r\n        <data>\r\n            <value>\r\n            <array>\r\n            <data>\r\n                <value>\r\n                <array>\r\n                <data>\r\n                    <value><string>invoice_status</string></value>\r\n                    <value><string>=</string></value>\r\n                    <value><string>to invoice</string></value>\r\n                </data>\r\n                </array>\r\n                </value>\r\n            </data>\r\n            </array>\r\n            </value>\r\n        </data>\r\n        </array>\r\n        </value>\r\n    </param>\r\n        <param>\r\n            <value>\r\n                <struct>\r\n                    <member>\r\n                        <name>fields</name>\r\n                        <value>\r\n                            <array>\r\n                                <data>\r\n                                    <value><string>id</string></value>\r\n                                    <value><string>name</string></value>\r\n                                    <value><string>partner_id</string></value>\r\n                                    <value><string>amount_total</string></value>\r\n                                </data>\r\n                            </array>\r\n                        </value>\r\n                    </member>\r\n                </struct>\r\n            </value>\r\n        </param>\r\n    </params>\r\n</methodCall>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8069/xmlrpc/2/object",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8069",
+					"path": [
+						"xmlrpc",
+						"2",
+						"object"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Invoice Request",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<methodCall>\r\n    <methodName>execute_kw</methodName>\r\n    <params>\r\n        <param>\r\n            <value><string>v17_mc_test</string></value>\r\n        </param>\r\n        <param>\r\n            <value><int>{{customer uid}}</int></value>\r\n        </param>\r\n        <param>\r\n            <value><string>{{customer token}}</string></value>\r\n        </param>\r\n        <param>\r\n            <value><string>invoice.request</string></value>\r\n        </param>\r\n        <param>\r\n            <value><string>create</string></value>\r\n        </param>\r\n        <param>\r\n            <value>\r\n                <array>\r\n                    <data>\r\n                        <value>\r\n                            <struct>\r\n                                <member>\r\n                                    <name>sale_id</name>\r\n                                    <value><int>6</int></value>\r\n                                </member>\r\n                                <member>\r\n                                    <name>partner_id</name>\r\n                                    <value><int>15</int></value>\r\n                                </member>\r\n                            </struct>\r\n                        </value>\r\n                    </data>\r\n                </array>\r\n            </value>\r\n        </param>\r\n    </params>\r\n</methodCall>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8069/xmlrpc/2/object",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8069",
+					"path": [
+						"xmlrpc",
+						"2",
+						"object"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
