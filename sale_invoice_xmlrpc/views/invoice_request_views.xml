@@ -1,0 +1,66 @@
+<odoo>
+    <!-- invoice request form view -->
+    <record id="view_invoice_request_form" model="ir.ui.view">
+        <field name="name">invoice.request.form</field>
+        <field name="model">invoice.request</field>
+        <field name="arch" type="xml">
+            <form string="Invoice Request" duplicate="false" import="false">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                    <button string="Approve" type="object" 
+                        name="action_approve" class="btn-primary"
+                        invisible="status == 'approved'"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <label for="sale_id"/>
+                        <field name="sale_id" readonly="1"/>
+                    </h1>
+                    <group>
+                        <field name="partner_id" readonly="1"/>
+                        <field name="invoice_id" readonly="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- invoice request tree view -->
+    <record id="view_invoice_request_tree" model="ir.ui.view">
+        <field name="name">invoice.request.tree</field>
+        <field name="model">invoice.request</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice Requests" create="false" duplicate="false" import="false">
+                <field name="sale_id"/>
+                <field name="invoice_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- invoice request action -->
+    <record id="action_invoice_request" model="ir.actions.act_window">
+        <field name="name">Invoice Requests</field>
+        <field name="res_model">invoice.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_invoice_request_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first invoice request.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu item for invoice requests -->
+    <menuitem id="menu_invoice_request"
+        name="Invoice Requests"
+        parent="sale.sale_menu_root"
+        action="action_invoice_request"
+        sequence="15"/>
+
+</odoo>
