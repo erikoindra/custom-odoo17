@@ -1,0 +1,18 @@
+version: '3'
+services:
+  odoo:
+    image: odoo17-image
+    user: root
+    depends_on: []
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo-data:/var/lib/odoo
+      - ./addons:/opt/odoo/odoo17/custom/mc/
+      - /opt/odoo/odoo17/odoo_mc.conf:/etc/odoo/odoo.conf
+    environment:
+      - HOST=172.17.0.1
+      - USER=eriko
+      - PASSWORD=1
+    command: 
+      - --config=/etc/odoo/odoo.conf

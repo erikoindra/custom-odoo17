@@ -1,0 +1,54 @@
+<odoo>
+    <!-- Show the user UID for portal user -->
+    <template id="portal_my_security" inherit_id="portal.portal_my_security"
+            name="Password policy data for portal">
+        <xpath expr="//section[@name='portal_revoke_all_devices_popup']" position="after">
+            <section t-if="debug and allow_api_keys">
+                <h4>
+                    User UID
+                </h4>
+                <p>
+                    User UID: <span t-field="request.env.user.id" t-field-options='{"widget": "text"}'/>
+                </p>
+                <t t-if="request.env.user.partner_id">
+                    <p>
+                        Partner ID: <span t-field="request.env.user.partner_id.id" t-field-options='{"widget": "text"}'/>
+                    </p>
+                </t>
+            </section>
+        </xpath>
+    </template>
+
+    <template id="portal_my_invoice_requests" name="My Invoice Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Invoice Requests</t>
+            </t>
+            <div t-if="not requests" class="alert alert-warning" role="alert">
+                There are currently no invoice requests for your account.
+            </div>
+            <t t-if="requests" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <span class='d-none d-md-inline'>Sales Order #</span>
+                            <span class='d-block d-md-none'>Ref.</span>
+                        </th>
+                        <th class="text-left">Invoice</th>
+                        <th class="text-left">Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="requests" t-as="req">
+                    <tr>
+                        <td class="text-left"><span t-field="req.sale_id.name"/></td>
+                        <td><a t-att-href="req.get_portal_url()"><t t-out="req.invoice_id.name"/></a></td>
+                        <td class="text-left"><span t-field="req.status"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

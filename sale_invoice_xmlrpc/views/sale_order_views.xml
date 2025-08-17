@@ -1,0 +1,14 @@
+<odoo>
+    <!-- sale order form view -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale_invoice_xmlrpc</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="invoice_request_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
