@@ -31,6 +31,10 @@ The `/xmlrpc/2/common` endpoint used to do authentication for user credentials. 
 
 The `/xmlrpc/2/object` endpoint used to interact with the database. In this case, the payload parameters depends on the method that will be called. More explanations on https://www.cybrosys.com/odoo/odoo-books/odoo-17-development/rpc/.
 
+4. Body
+
+The body to sent the request shall be written in raw xml format, for the formatting references on https://www.w3schools.com/xml/xml_syntax.asp.
+
 
 **Endpoints**
 - 
