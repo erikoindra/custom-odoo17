@@ -1,5 +1,5 @@
 """ import modules """
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 
 
 class SaleOrder(models.Model):
@@ -10,6 +10,11 @@ class SaleOrder(models.Model):
         string="Invoice Request",
         help="Link to the invoice request associated with this sale order."
     )
+
+    @api.model
+    def write_with_sudo(self, ids, values):
+        """ Override the write method to allow writing with sudo for xmlrpc calls """
+        return self.browse(ids).sudo().write(values)
 
     def action_create_invoice_request(self):
         """ Create an invoice request for the sale order """
