@@ -38,13 +38,22 @@ The body to sent the request shall be written in raw xml format, for the formatt
 
 **Endpoints**
 - 
-1. `/sale_invoice_xmlrpc/external_sale_invoice_form`
+1. `/sale_invoice_xmlrpc/external_sale_invoice_form?access_token=`
 
-This endpoint used to show the customers the list of their Invoice Requests.
+This endpoint used to show the customers the list of their Invoice Requests. Customers can access the endpoint without login as long as adding the user's token to the endpoint.
 
 2. `/sale_invoice_xmlrpc/external_sale_invoice_form/<int:id>#access_token=%s`
 
 Customers can access this endpoint by clicking the Invoice data when they appeared after the invoice requests are approved. This will redirect the page into the reporting preview and the customers can download the reports.
+
+**Client App**
+1. While running the backend client app, we will receive this confirmation to input the user username and token.<br/>
+![Login Request](img/image1.png)
+2. Then it will displays the user's "To Invoice" Sale Orders and ask confirmation if the user want to create invoices request from the sales.<br/>
+![To Invoice Sales](img/image2.png)
+3. If user select the sales ids, it will generate the invoice request and automatically linked the sales with the invoice request data.
+![Created Invoice Request](img/image3.png)
+
 
 **Docker-compose file**
 -

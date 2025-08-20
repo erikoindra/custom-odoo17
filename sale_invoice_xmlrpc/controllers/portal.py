@@ -60,9 +60,17 @@ class ExternalSaleInvoiceForm(payment_portal.PaymentPortal):
 
         return values
 
-    @http.route(['/sale_invoice_xmlrpc/external_sale_invoice_form', '/sale_invoice_xmlrpc/external_sale_invoice_form/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_invoice_requests(self, **kwargs):
-        values = self._prepare_invoicerequest_portal_rendering_values(quotation_page=False, **kwargs)
+    @http.route(['/sale_invoice_xmlrpc/external_sale_invoice_form', '/sale_invoice_xmlrpc/external_sale_invoice_form/page/<int:page>'], type='http', auth="public", website=True)
+    def portal_my_invoice_requests(self, access_token=None, **kwargs):
+        """ Render the portal page for invoice requests """
+        # Adding case where user is not logged in but has an access token
+        if access_token:
+            user_id = request.env["res.users.apikeys"]._check_credentials(scope='odoo.plugin.outlook', key=access_token)
+            if not user_id:
+                raise AccessError(_('Access token invalid'))
+            request.update_env(user=user_id)
+            request.update_context(**request.env.user.context_get())
+        values = self._prepare_invoicerequest_portal_rendering_values(quotation_page=False,**kwargs)
         request.session['my_orders_history'] = values['requests'].ids[:100]
         return request.render("sale_invoice_xmlrpc.portal_my_invoice_requests", values)
 
@@ -76,7 +84,7 @@ class ExternalSaleInvoiceForm(payment_portal.PaymentPortal):
 
         if report_type in ('html', 'pdf', 'text'):
             return self._show_report(
-                model=requests_sudo,
+                model=requests_sudo.invoice_id,
                 report_type=report_type,
                 report_ref='account.account_invoices',
                 download=download,
