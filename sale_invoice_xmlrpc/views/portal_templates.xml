@@ -33,8 +33,7 @@
                 <thead>
                     <tr class="active">
                         <th>
-                            <span class='d-none d-md-inline'>Sales Order #</span>
-                            <span class='d-block d-md-none'>Ref.</span>
+                            <span class='d-none d-md-inline'>Sales Order</span>
                         </th>
                         <th class="text-left">Invoice</th>
                         <th class="text-left">Status</th>
